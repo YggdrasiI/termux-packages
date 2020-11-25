@@ -6,7 +6,7 @@ TERMUX_PKG_SRCURL=https://mirrors.kernel.org/gnu/gmp/gmp-${TERMUX_PKG_VERSION}.t
 TERMUX_PKG_SHA256=fd4829912cddd12f84181c3451cc752be224643e87fac497b69edddadc49b4f2
 TERMUX_PKG_BREAKS="libgmp-dev"
 TERMUX_PKG_REPLACES="libgmp-dev"
-TERMUX_PKG_EXTRA_CONFIGURE_ARGS="--enable-cxx"
+TERMUX_PKG_EXTRA_CONFIGURE_ARGS="--enable-cxx --with-pic"
 
 termux_step_pre_configure() {
 # the cxx tests fail because it won't link properly without this

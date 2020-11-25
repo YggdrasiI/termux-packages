@@ -18,6 +18,7 @@ TERMUX_PKG_EXTRA_CONFIGURE_ARGS="
 --with-included-libtasn1
 --without-p11-kit
 --disable-guile
+--with-pic
 "
 
 termux_step_pre_configure() {
