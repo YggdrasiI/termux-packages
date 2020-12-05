@@ -1,0 +1,37 @@
+From c0613e7dd729f433d3eb1d3da003225b42818e7a Mon Sep 17 00:00:00 2001
+From: Olaf Schulz <olaf_schulz@posteo.de>
+Date: Sat, 5 Dec 2020 19:00:53 +0100
+Subject: [PATCH] Add gnutls include dir
+
+---
+ src/onion/CMakeLists.txt   | 1 +
+ tools/opack/CMakeLists.txt | 1 +
+ 2 files changed, 2 insertions(+)
+
+diff --git a/src/onion/CMakeLists.txt b/src/onion/CMakeLists.txt
+index 511a5b3..0084c25 100644
+--- a/src/onion/CMakeLists.txt
++++ b/src/onion/CMakeLists.txt
+@@ -60,6 +60,7 @@ if (${PAM_ENABLED})
+ 	LIST(APPEND LIBRARIES ${PAM_LIBRARY})
+ endif (${PAM_ENABLED})
+ if (GNUTLS_ENABLED)
++	include_directories(${GNUTLS_INCLUDE_DIR})
+ 	LIST(APPEND LIBRARIES ${GCRYPT_LIBRARIES} ${GNUTLS_LIBRARIES})
+ endif(GNUTLS_ENABLED)
+ if (PTHREADS)
+diff --git a/tools/opack/CMakeLists.txt b/tools/opack/CMakeLists.txt
+index a7b040e..fa24b83 100644
+--- a/tools/opack/CMakeLists.txt
++++ b/tools/opack/CMakeLists.txt
+@@ -7,6 +7,7 @@ if(PTHREADS_LIB)
+ endif(PTHREADS_LIB)
+ 
+ if(GNUTLS_ENABLED)
++	include_directories(${GNUTLS_INCLUDE_DIR})
+ 	target_link_libraries(opack ${GNUTLS_LIBRARIES})
+ endif(GNUTLS_ENABLED)
+ 
+-- 
+2.25.1
+

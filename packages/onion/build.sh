@@ -46,7 +46,7 @@ TERMUX_PKG_HOSTBUILD="true"
 
 # Minimal set for otemplate binary
 TERMUX_PKG_EXTRA_HOSTBUILD_CONFIGURE_ARGS="
-		-DONION_USE_SSL=false
+		-DONION_USE_SSL=true
 		-DONION_USE_PAM=false
 		-DONION_USE_PTHREADS=false
 		-DONION_USE_PNG=false
@@ -73,6 +73,7 @@ termux_step_get_source() {
 	cd onion
 	git checkout -b termux_build "${TERMUX_GIT_COMMIT}"
 	git am "${TERMUX_PKG_BUILDER_DIR}/patches/termux_build.patch"
+	git am "${TERMUX_PKG_BUILDER_DIR}/patches/termux_gnutls_includedir.patch"
 }
 
 termux_step_host_build() {
@@ -82,6 +83,8 @@ termux_step_host_build() {
 	mkdir -p $TERMUX_PKG_HOSTBUILD_DIR/build
 	cd $TERMUX_PKG_HOSTBUILD_DIR/build
 	cmake \
+		-DCMAKE_INCLUDE_PATH="/data/data/com.termux/files/usr/include/" \
+		-DCMAKE_LIBRARY_PATH="/data/data/com.termux/files/usr/lib/ " \
 		$TERMUX_PKG_EXTRA_HOSTBUILD_CONFIGURE_ARGS \
 		-DCMAKE_INSTALL_PREFIX="$TERMUX_PKG_HOSTBUILD_DIR/onion" \
 		$TERMUX_PKG_SRCDIR/onion
